@@ -2,7 +2,7 @@ import ctypes
 import numpy as np
 import torch
 
-lib = ctypes.CDLL("../../src/kernals/softmax.so")
+lib = ctypes.CDLL("../../src/kernals/kernals.so")
 
 lib.softmax.argtypes = [
     np.ctypeslib.ndpointer(dtype=np.float64, flags="C_CONTIGUOUS"),

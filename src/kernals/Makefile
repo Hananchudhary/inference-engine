@@ -3,19 +3,13 @@ CC = gcc
 CFLAGS = -I/usr/local/include
 LDFLAGS = -L/usr/local/lib -lblis -lm
 
-TARGET = kernels.so
-SRC = attention.o softmax.o
+TARGET = kernals.so
+SRC = attention.c softmax.c
 
 all: $(TARGET)
 
 $(TARGET): $(SRC)
-	$(CC) -shared -o $(TARGET) $(SRC) $(LDFLAGS)
-
-softmax.so: softmax.c
-	$(CC) -shared -fPIC softmax.c $(CFLAGS) $(LDFLAGS) -o softmax.so
-
-attention.so: attention.c softmax.c
-	$(CC) -shared -fPIC attention.c softmax.c $(CFLAGS) $(LDFLAGS) -o attention.so
+	$(CC) -shared -fPIC $(SRC) $(CFLAGS) $(LDFLAGS) -o $(TARGET)
 
 clean:
-	rm -f $(SRC) $(TARGET)
+	rm -f $(TARGET)

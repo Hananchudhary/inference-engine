@@ -37,7 +37,6 @@ void attention(double* Q, double* K, double* V, uint32_t n, uint32_t d, double* 
 //     double V[6] = {10,0,30,0,20,30};
 //     uint16_t n = 3, d = 2;
 //     double out[6];
-//     double sqrt_d = sqrt(d);
 //     attention(Q, K, V, n, d, out, true);
 //     for(int i = 0;i < n;i++){
 //         for(int j = 0;j < d;j++){

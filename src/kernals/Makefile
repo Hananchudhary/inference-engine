@@ -11,11 +11,11 @@ all: $(TARGET)
 $(TARGET): $(SRC)
 	$(CC) -shared -o $(TARGET) $(SRC) $(LDFLAGS)
 
-softmax.o: softmax.c
-	$(CC) -c softmax.c $(CFLAGS) -o softmax.o
+softmax.so: softmax.c
+	$(CC) -shared -fPIC softmax.c $(CFLAGS) $(LDFLAGS) -o softmax.so
 
-attention.o: attention.c
-	$(CC) -c attention.c $(CFLAGS) -o attention.o
+attention.so: attention.c softmax.c
+	$(CC) -shared -fPIC attention.c softmax.c $(CFLAGS) $(LDFLAGS) -o attention.so
 
 clean:
 	rm -f $(SRC) $(TARGET)

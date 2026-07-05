@@ -2,8 +2,10 @@ import ctypes
 import numpy as np
 import torch
 import torch.nn.functional as F
+import platform
 
-lib = ctypes.CDLL("../../src/kernals/kernals.so")
+_EXT = {"Darwin": ".dylib", "Linux": ".so", "Windows": ".dll"}
+lib = ctypes.CDLL(f"build/libkernels{_EXT[platform.system()]}")
 
 lib.attention.argtypes = [
     np.ctypeslib.ndpointer(dtype=np.float64, flags="F_CONTIGUOUS"),
@@ -57,8 +59,14 @@ for _ in range(num_test):
         passed +=1
     except AssertionError:
         pass
-print(f"(With masking) Passed: {passed}/{num_test}")
-
+    
+if passed == num_test:
+    print(f"\033[92m[PASS]\033[0m attention (masked) "
+          f"({passed}/{num_test} tests passed)")
+else:
+    print(f"\033[91m[FAIL]\033[0m attention (masked) "
+          f"({passed}/{num_test} tests passed)")
+    
 for _ in range(num_test):
     Q_np = np.asfortranarray(np.random.randn(L, D))
     K_np = np.asfortranarray(np.random.randn(L, D))
@@ -93,4 +101,10 @@ for _ in range(num_test):
         passed +=1
     except AssertionError:
         pass
-print(f"(Without masking) Passed: {passed}/{num_test}")
+    
+if passed == num_test:
+    print(f"\033[92m[PASS]\033[0m attention (unmasked) "
+          f"({passed}/{num_test} tests passed)")
+else:
+    print(f"\033[91m[FAIL]\033[0m attention (unmasked) "
+          f"({passed}/{num_test} tests passed)")

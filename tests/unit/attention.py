@@ -18,7 +18,7 @@ lib.attention.argtypes = [
 lib.attention.restype = None
 
 num_test = 1000
-length = 100
+
 
 passed = 0
 L = 10
@@ -49,16 +49,16 @@ for _ in range(num_test):
         out,
         True,
     )
-    # print(out)
-    # print("\n")
-    # print(res)
     try:
         assert (np.allclose(out, res, rtol=1e-9, atol=1e-12))
         passed +=1
     except AssertionError:
-        pass
+        print(out)
+        print("\n")
+        print(res)
 print(f"(With masking) Passed: {passed}/{num_test}")
 
+passed = 0
 for _ in range(num_test):
     Q_np = np.asfortranarray(np.random.randn(L, D))
     K_np = np.asfortranarray(np.random.randn(L, D))
@@ -71,7 +71,7 @@ for _ in range(num_test):
         Q,
         K,
         V,
-        is_causal=True,
+        is_causal=False,
         dropout_p=0.0,
     )
     res = np.asfortranarray(res.squeeze(0).squeeze(0).numpy())
@@ -85,12 +85,11 @@ for _ in range(num_test):
         out,
         False,
     )
-    # print(out)
-    # print("\n")
-    # print(res)
     try:
         assert (np.allclose(out, res, rtol=1e-9, atol=1e-12))
         passed +=1
     except AssertionError:
-        pass
+        print(out)
+        print("\n")
+        print(res)
 print(f"(Without masking) Passed: {passed}/{num_test}")

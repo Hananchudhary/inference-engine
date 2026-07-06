@@ -19,7 +19,10 @@
 - simple looping approach was around 3x faster so that implementation was used
 
 ## RMS Norm
-
+- Benchmarked both implementation, blis vs plain c
+- compared time of both approaches
+- simple looping approach was around 2x faster so that implementation was used
+  
 ## Testing approach
 - For every kernal, load the c object file and matched the output with pytorch built-in functions
 - Ran 1000 tests of random input for every kernal separately

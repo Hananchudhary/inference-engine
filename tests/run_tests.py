@@ -12,6 +12,7 @@ tests = [
     root / "tests/unit/multiAttention.py",
     root / "tests/unit/silu.py",
     root / "tests/unit/sigmoid.py",
+    root / "tests/unit/relu.py",
 ]
 
 passed = 0

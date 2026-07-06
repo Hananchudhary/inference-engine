@@ -1,9 +1,8 @@
-#include"blis.h"
 #include"../../inc/kernals/relu.h"
-#include<string.h>
-void RELU(double* x, uint32_t len){
+
+void RELU(double* x, uint32_t len) {
     uint64_t mask = 0x7FFFFFFFFFFFFFFF;
-    for(int i = 0;i < len;i++){
+    for (int i = 0;i < len;i++) {
         uint64_t bits;
         memcpy(&bits, (x + i), sizeof(bits));
         uint64_t val = bits;
@@ -11,6 +10,13 @@ void RELU(double* x, uint32_t len){
         double value;
         memcpy(&value, &val, sizeof(bits));
         x[i] += value;
-        x[i] /= 2;   
+        x[i] /= 2;
     }
 }
+
+// void RELU(double* x, uint32_t len) {
+//     for (int i = 0;i < len;i++) {
+//         fmaxf(0.0f, x[i]);
+//     }
+//     return;
+// }

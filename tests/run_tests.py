@@ -8,6 +8,7 @@ tests = [
     root / "tests/unit/layernorm.py",
     root / "tests/unit/softmax.py",
     root / "tests/unit/attention.py",
+    root / "tests/unit/rmsnorm.py",
 ]
 
 passed = 0

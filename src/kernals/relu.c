@@ -1,5 +1,5 @@
 #include"../../inc/kernals/relu.h"
-
+#include <string.h>
 void RELU(double* x, uint32_t len) {
     uint64_t mask = 0x7FFFFFFFFFFFFFFF;
     for (int i = 0;i < len;i++) {

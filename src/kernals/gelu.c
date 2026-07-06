@@ -6,10 +6,14 @@ void kernel_gelu_cpu_f32_forward(
     float* __restrict output,
     const size_t length
 ) {
-    float half = 0.5f;
-    float root_two_over_pi = 0.7978845608028654f; // sqrt(2/pi)
-    for (size_t i = 0; i < length; i++) {
-        output[i] = half * (1 + tanhf(root_two_over_pi * (input[i] + 0.044715f * input[i] * input[i] * input[i])));
-    }
+    const float half = 0.5f;
+    const float root_two_over_pi = 0.7978845608028654f;
+    const float coeff = 0.044715f;
 
+    for (size_t i = 0; i < length; i++) {
+        float x = input[i];
+        float x3 = x * x * x;
+        float inner = root_two_over_pi * (x + coeff * x3);
+        output[i] = half * x * (1.0f + tanhf(inner));
+    }
 }

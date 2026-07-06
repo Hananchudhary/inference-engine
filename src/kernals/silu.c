@@ -1,4 +1,5 @@
 #include"../../inc/kernals/silu.h"
+#include <math.h>
 
 // explicitely call sigmoid ??
 void SILU(double* x, double* y, uint32_t len) {

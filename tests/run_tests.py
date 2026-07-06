@@ -13,6 +13,7 @@ tests = [
     root / "tests/unit/silu.py",
     root / "tests/unit/sigmoid.py",
     root / "tests/unit/relu.py",
+    root / "tests/unit/gelu.py",
 ]
 
 passed = 0

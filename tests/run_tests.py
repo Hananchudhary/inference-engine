@@ -10,6 +10,8 @@ tests = [
     root / "tests/unit/softmax.py",
     root / "tests/unit/attention.py",
     root / "tests/unit/multiAttention.py",
+    root / "tests/unit/silu.py",
+    root / "tests/unit/sigmoid.py",
 ]
 
 passed = 0

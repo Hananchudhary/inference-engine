@@ -2,9 +2,11 @@ import ctypes
 import numpy as np
 import torch
 import torch.nn.functional as F
+import platform
 
 
-lib = ctypes.CDLL("../../src/kernals/kernals.so")
+_EXT = {"Darwin": ".dylib", "Linux": ".so", "Windows": ".dll"}
+lib = ctypes.CDLL(f"build/libkernels{_EXT[platform.system()]}")
 
 lib.SILU.argtypes = [
     np.ctypeslib.ndpointer(dtype=np.float64, flags="C_CONTIGUOUS"),

@@ -8,9 +8,9 @@ void kernel_layernorm_cpu_f32_forward(
     const float* __restrict weight,
     const float* __restrict bias,
     float* __restrict y,
-    size_t seq_len,
-    size_t embed_dim,
-    float eps
+    const size_t seq_len,
+    const size_t embed_dim,
+    const float eps
 );
 
 #endif

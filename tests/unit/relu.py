@@ -9,6 +9,7 @@ lib = ctypes.CDLL(f"build/libkernels{_EXT[platform.system()]}")
 
 lib.RELU.argtypes = [
     np.ctypeslib.ndpointer(dtype=np.float64, flags="C_CONTIGUOUS"),
+    np.ctypeslib.ndpointer(dtype=np.float64, flags="C_CONTIGUOUS"),
     ctypes.c_uint32
 ]
 
@@ -20,12 +21,13 @@ length = 100
 passed = 0
 for _ in range(num_test):
     a = np.random.rand(length)
+    b = np.zeros_like(a)
     x = torch.tensor(a)
     y = F.relu(x)
-    lib.RELU(a, length)
+    lib.RELU(a, b, length)
     
     try:
-        assert (np.allclose(a, y, rtol=1e-9, atol=1e-12))
+        assert (np.allclose(b, y, rtol=1e-9, atol=1e-12))
         passed +=1
     except AssertionError:
         pass

@@ -7,9 +7,9 @@ void kernel_rmsnorm_cpu_f32_forward(
     const float* __restrict embed,
     const float* __restrict weight,
     float* __restrict y,
-    size_t seq_len,
-    size_t embed_dim,
-    float eps
+    const size_t seq_len,
+    const size_t embed_dim,
+    const float eps
 );
 
 #endif

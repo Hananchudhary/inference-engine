@@ -1,6 +1,7 @@
 import ctypes
 import numpy as np
 import torch
+import torch.nn as nn
 import sys
 import platform
 
@@ -50,10 +51,14 @@ for test_idx in range(num_tests):
     try:
         x_torch = torch.tensor(embeddings, dtype=torch.float32)
         w_torch = torch.tensor(weights, dtype=torch.float32)
-        rms = torch.sqrt(torch.mean(x_torch ** 2, dim=-1, keepdim=True) + eps)
-        y_torch = (x_torch / rms) * w_torch
-        y_numpy = y_torch.numpy()
+        rms_norm = nn.RMSNorm(
+            normalized_shape=x_torch.shape[-1],
+            eps=eps,
+            elementwise_affine=False,
+        )
 
+        y_torch = rms_norm(x_torch) * w_torch
+        y_numpy = y_torch.numpy()
         abs_error = np.abs(out_reshaped - y_numpy)
         max_abs_error = np.max(abs_error)
         mean_abs_error = np.mean(abs_error)

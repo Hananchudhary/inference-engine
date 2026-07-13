@@ -5,13 +5,13 @@
 #include <math.h>
 
 void kernel_rmsnorm_cpu_f32_forward(
-    const float* __restrict embed,         // embeddings
-    const float* __restrict weight,        // gamma
-    float* __restrict y,                   // output
-    size_t seq_len,                        // number of tokens
-    size_t embed_dim,                      // embedding dimension
-    float eps                              // div zero prevention 
-) {
+    const float* __restrict embed,
+    const float* __restrict weight,
+    float* __restrict y,
+    const size_t seq_len,
+    const size_t embed_dim,
+    const float eps
+){
 
     const float inv_dim = 1.0f / (float)embed_dim;
 

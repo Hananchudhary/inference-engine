@@ -5,9 +5,10 @@
 // expecting in row major but self attention works in column major
 // remeber to use assert for exceptions
 // dimensions of Ws are being calculated
-void multiAttention(double* W_Q, double* W_K, double* W_V, double* X,
-                            uint32_t n, uint32_t d, uint32_t q_h, uint32_t kv_h, 
-                            double* W_O, double* out, bool masked){
+void multiAttention(const double* __restrict W_Q,const double* __restrict W_K, 
+    const double* __restrict W_V,const double* __restrict X, const uint32_t n, 
+    const uint32_t d, const uint32_t q_h, const uint32_t kv_h, 
+    const double* __restrict W_O, double* __restrict out, const bool masked){
      uint32_t Q_dim = n * d;
      uint32_t q_cols = d / q_h;
      uint32_t dims = q_cols * kv_h;

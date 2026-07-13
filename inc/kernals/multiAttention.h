@@ -2,7 +2,8 @@
 #define __MULTIATTENTION_H__
 
 #include<stdint.h>
-void multiAttention(double* W_Q, double* W_K, double* W_V, double* X,
-                            uint32_t n, uint32_t d, uint32_t q_h, uint32_t kv_h, 
-                            double* W_O, double* out, bool masked);
+void multiAttention(const double* __restrict W_Q,const double* __restrict W_K, 
+    const double* __restrict W_V,const double* __restrict X, const uint32_t n, 
+    const uint32_t d, const uint32_t q_h, const uint32_t kv_h, 
+    const double* __restrict W_O, double* __restrict out, const bool masked);
 #endif

@@ -4,8 +4,9 @@
 #include "../../inc/kernals/softmax.h"
 #include"../../inc/kernals/attention.h"
 #include<stdbool.h>
-void attention(double* Q, double* K, double* V, uint32_t n, uint32_t d, double* out, 
-                 bool masked){
+void attention(const double* __restrict Q, const double* __restrict K, 
+    const double* __restrict V,const uint32_t n, const uint32_t d, double*__restrict out, 
+    const bool masked){
                     
     uint32_t score_dim = n * n; 
     uint32_t out_dim = n * d;

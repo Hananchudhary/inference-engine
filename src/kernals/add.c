@@ -1,5 +1,4 @@
-#include"../../inc/kernals/gelu.h"
-
+#include"../../inc/kernals/add.h"
 #include <stddef.h>
 
 void kernel_add_cpu_f32_forward(
